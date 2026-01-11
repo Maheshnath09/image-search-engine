@@ -1,0 +1,22 @@
+[project]
+name = "image-search-engine"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "faiss-cpu>=1.7.0",
+    "fastapi==0.109.0",
+    "numpy<2.0.0",
+    "pillow==10.2.0",
+    "pycocotools==2.0.7",
+    "pydantic==2.5.3",
+    "pydantic-settings==2.1.0",
+    "python-dotenv==1.0.0",
+    "python-multipart==0.0.6",
+    "requests==2.31.0",
+    "sentence-transformers==2.3.1",
+    "streamlit==1.31.0",
+    "tqdm==4.66.1",
+    "uvicorn[standard]==0.27.0",
+]

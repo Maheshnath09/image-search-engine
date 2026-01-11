@@ -1,0 +1,15 @@
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+streamlit==1.31.0
+sentence-transformers==2.3.1
+# faiss-cpu usually requires numpy < 2.0.0 for stability in some versions
+faiss-cpu>=1.7.0
+Pillow==10.2.0
+python-multipart==0.0.6
+pydantic==2.5.3
+pydantic-settings==2.1.0
+python-dotenv==1.0.0
+numpy<2.0.0
+tqdm==4.66.1
+requests==2.31.0
+pycocotools==2.0.7
