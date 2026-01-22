@@ -64,34 +64,31 @@ async def startup_event():
     """Load indices and initialize API clients"""
     global multi_index_searcher, api_client
     
-    try:
-        print("🚀 Starting Enhanced Image Search Engine API...")
-        
-        # Load CLIP model
-        print("📦 Loading CLIP model...")
-        get_model()
-        
-        # Load FAISS indices
-        print("📦 Loading FAISS indices...")
-        multi_index_searcher = MultiIndexSearcher()
-        
-        # Print stats
-        stats = multi_index_searcher.get_stats()
+    print("🚀 Starting Enhanced Image Search Engine API...")
+    
+    # Load CLIP model
+    print("📦 Loading CLIP model...")
+    get_model()
+    
+    # Load FAISS indices (will work even if none exist)
+    print("📦 Loading FAISS indices...")
+    multi_index_searcher = MultiIndexSearcher()
+    
+    # Print stats
+    stats = multi_index_searcher.get_stats()
+    if stats['total_images'] > 0:
         print(f"✅ Loaded indices: {stats['indices_loaded']}")
         print(f"✅ Total indexed images: {stats['total_images']}")
-        
-        # Initialize API client
-        if settings.ENABLE_EXTERNAL_APIS:
-            print("🌐 Initializing external API clients...")
-            api_client = AggregatedSearchClient()
-            print("✅ API clients ready")
-        
-        print("✅ API is ready!")
-        
-    except Exception as e:
-        print(f"❌ Startup error: {e}")
-        print("💡 Make sure to run 'python indexer.py' first!")
-        raise
+    else:
+        print("⚠️ No local images indexed - using external APIs only")
+    
+    # Initialize API client
+    if settings.ENABLE_EXTERNAL_APIS:
+        print("🌐 Initializing external API clients...")
+        api_client = AggregatedSearchClient()
+        print("✅ API clients ready")
+    
+    print("✅ API is ready!")
 
 
 @app.get("/")

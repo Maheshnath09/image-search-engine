@@ -189,7 +189,9 @@ class MultiIndexSearcher:
                 logger.warning(f"Could not load COCO index: {e}")
         
         if not self.indices:
-            raise FileNotFoundError("No indices found! Run indexer.py first.")
+            # Don't raise error - app can still work with external APIs
+            logger.warning("⚠️ No local indices found. External APIs will be used for search.")
+            logger.info("💡 To enable local search, run: python indexer.py")
     
     def search(self, query_vector: np.ndarray, k: int = 10, 
                sources: Optional[List[str]] = None) -> List[Dict]:
