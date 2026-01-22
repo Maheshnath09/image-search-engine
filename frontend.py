@@ -328,7 +328,7 @@ def main():
         if health_data and health_data.get('total_images', 0) == 0:
             st.warning("⚠️ No indexed images available. Results may be limited. Use Text Search for best results.")
         
-        st.info("Upload an image to find similar images")
+        st.info("Upload an image to find similar images in the COCO dataset")
         
         uploaded_file = st.file_uploader(
             "Upload an image",
@@ -337,20 +337,18 @@ def main():
         )
         
         if uploaded_file:
-            col1, col2 = st.columns([1, 3])
+            # Show query image in a smaller column
+            st.image(uploaded_file, caption="Query Image", width=200)
             
-            with col1:
-                st.image(uploaded_file, caption="Query Image")
-                
-                if st.button("🔍 Find Similar", key="image_search"):
-                    with st.spinner("🔍 Searching for similar images..."):
-                        uploaded_file.seek(0)
-                        results = search_by_image(uploaded_file, top_k, selected_indexed or None)
-                        
-                        if results:
-                            with col2:
-                                st.markdown("### Similar Images")
-                            display_results(results)
+            if st.button("🔍 Find Similar", key="image_search"):
+                with st.spinner("🔍 Searching for similar images..."):
+                    uploaded_file.seek(0)
+                    results = search_by_image(uploaded_file, top_k, selected_indexed or None)
+                    
+                    if results:
+                        st.markdown("---")
+                        st.markdown("### Similar Images Found")
+                        display_results(results)
     
     # Statistics Tab
     with tab3:
