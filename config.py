@@ -49,7 +49,7 @@ class Settings(BaseSettings):
     COCO_IMAGES_URL: str = "http://images.cocodataset.org/val2017"
     COCO_ANNOTATIONS_URL: str = "http://images.cocodataset.org/annotations/annotations_trainval2017.zip"
     ENABLE_COCO: bool = True
-    COCO_SUBSET_SIZE: Optional[int] = 5000  # Use subset for faster indexing (None = all)
+    COCO_SUBSET_SIZE: Optional[int] = 500  # Reduced for HF Spaces (faster startup)
     
     # Search Settings
     LOCAL_WEIGHT: float = 0.5  # Weight for local results
