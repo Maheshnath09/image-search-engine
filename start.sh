@@ -24,10 +24,11 @@ else
 fi
 
 # Start Streamlit frontend (this blocks and keeps container running)
-echo "🖥️ Starting Streamlit frontend on port 8501..."
+# HF Spaces requires port 7860
+echo "🖥️ Starting Streamlit frontend on port 7860..."
 export API_URL="http://localhost:8000"
 streamlit run frontend.py \
     --server.address 0.0.0.0 \
-    --server.port 8501 \
+    --server.port 7860 \
     --server.headless true \
     --browser.gatherUsageStats false

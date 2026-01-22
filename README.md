@@ -4,7 +4,7 @@ emoji: 🔍
 colorFrom: blue
 colorTo: purple
 sdk: docker
-app_port: 8501
+app_port: 7860
 ---
 
 # 🔍 Enhanced Image Search Engine v2.0

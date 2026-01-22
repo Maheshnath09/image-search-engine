@@ -25,12 +25,12 @@ RUN mkdir -p data/images data/coco data/cache vector_store
 # Make startup script executable
 RUN chmod +x start.sh
 
-# Expose ports (8000 for API, 8501 for Streamlit)
-EXPOSE 8000 8501
+# Expose ports (8000 for API, 7860 for Streamlit - HF Spaces requirement)
+EXPOSE 8000 7860
 
 # Health check for Streamlit
 HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=3 \
-    CMD curl -f http://localhost:8501/_stcore/health || exit 1
+    CMD curl -f http://localhost:7860/_stcore/health || exit 1
 
 # Run startup script
 CMD ["./start.sh"]
