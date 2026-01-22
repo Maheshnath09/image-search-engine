@@ -251,8 +251,16 @@ async def search_image(
         if not multi_index_searcher:
             raise HTTPException(status_code=503, detail="Searcher not initialized")
         
+        # Check if we have any indexed images
+        stats = multi_index_searcher.get_stats()
+        if stats['total_images'] == 0:
+            raise HTTPException(
+                status_code=400, 
+                detail="Image search requires indexed images. Use text search with external APIs instead."
+            )
+        
         # Validate file
-        if not file.content_type.startswith('image/'):
+        if not file.content_type or not file.content_type.startswith('image/'):
             raise HTTPException(status_code=400, detail="File must be an image")
         
         # Read and process image
