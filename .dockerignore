@@ -46,7 +46,7 @@ ehthumbs.db
 Thumbs.db
 
 # Project specific
-*.md
+# Note: README.md must be included for Hugging Face Spaces
 LICENSE
 .env.example
 

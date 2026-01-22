@@ -6,10 +6,11 @@ import streamlit as st
 import requests
 from PIL import Image
 import io
+import os
 from pathlib import Path
 
-# Configuration
-API_URL = "http://localhost:8000"
+# Configuration - Use environment variable for deployment flexibility
+API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 # Page config
 st.set_page_config(

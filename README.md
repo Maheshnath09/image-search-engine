@@ -1,3 +1,12 @@
+---
+title: Image Search Engine
+emoji: 🔍
+colorFrom: blue
+colorTo: purple
+sdk: docker
+app_port: 8501
+---
+
 # 🔍 Enhanced Image Search Engine v2.0
 
 > A powerful, multi-source image search engine capable of searching local datasets (like COCO), and external APIs (Openverse, Lexica, Unsplash) using both text queries and image similarity.
