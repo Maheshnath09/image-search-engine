@@ -19,6 +19,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
+# Copy streamlit config
+COPY .streamlit /app/.streamlit
+
 # Create necessary directories
 RUN mkdir -p data/images data/coco data/cache vector_store
 

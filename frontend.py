@@ -324,40 +324,33 @@ def main():
     with tab2:
         st.header("Search by Image Similarity")
         
-        # Check if we have indexed images
+        # Show warning if no indexed images
         if health_data and health_data.get('total_images', 0) == 0:
-            st.warning("⚠️ **Image search is currently unavailable**")
-            st.info("""
-            Image-to-image search requires locally indexed images (COCO dataset or custom images).
+            st.warning("⚠️ No indexed images available. Results may be limited. Use Text Search for best results.")
+        
+        st.info("Upload an image to find similar images")
+        
+        uploaded_file = st.file_uploader(
+            "Upload an image",
+            type=['jpg', 'jpeg', 'png', 'bmp', 'gif', 'webp'],
+            label_visibility="collapsed"
+        )
+        
+        if uploaded_file:
+            col1, col2 = st.columns([1, 3])
             
-            **What you can do:**
-            - Use **Text Search** tab with external APIs (Openverse, Lexica)
-            - The app maintainer can run `python indexer.py` to enable local image search
-            """)
-        else:
-            st.info("Upload an image to find similar images in the indexed datasets")
-            
-            uploaded_file = st.file_uploader(
-                "Upload an image",
-                type=['jpg', 'jpeg', 'png', 'bmp', 'gif', 'webp'],
-                label_visibility="collapsed"
-            )
-            
-            if uploaded_file:
-                col1, col2 = st.columns([1, 3])
+            with col1:
+                st.image(uploaded_file, caption="Query Image")
                 
-                with col1:
-                    st.image(uploaded_file, caption="Query Image")
-                    
-                    if st.button("🔍 Find Similar", key="image_search"):
-                        with st.spinner("🔍 Searching for similar images..."):
-                            uploaded_file.seek(0)
-                            results = search_by_image(uploaded_file, top_k, selected_indexed or None)
-                            
-                            if results:
-                                with col2:
-                                    st.markdown("### Similar Images")
-                                display_results(results)
+                if st.button("🔍 Find Similar", key="image_search"):
+                    with st.spinner("🔍 Searching for similar images..."):
+                        uploaded_file.seek(0)
+                        results = search_by_image(uploaded_file, top_k, selected_indexed or None)
+                        
+                        if results:
+                            with col2:
+                                st.markdown("### Similar Images")
+                            display_results(results)
     
     # Statistics Tab
     with tab3:

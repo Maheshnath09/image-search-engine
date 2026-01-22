@@ -27,8 +27,4 @@ fi
 # HF Spaces requires port 7860
 echo "🖥️ Starting Streamlit frontend on port 7860..."
 export API_URL="http://localhost:8000"
-streamlit run frontend.py \
-    --server.address 0.0.0.0 \
-    --server.port 7860 \
-    --server.headless true \
-    --browser.gatherUsageStats false
+streamlit run frontend.py
